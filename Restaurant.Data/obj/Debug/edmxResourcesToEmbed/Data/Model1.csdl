@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RestaurantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="RestaurantEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="products" EntityType="RestaurantModel.product" />
+    <EntitySet Name="users" EntityType="RestaurantModel.user" />
+    <EntitySet Name="orderDetailes" EntityType="RestaurantModel.orderDetaile" />
+    <AssociationSet Name="FK_orderDetailes_product" Association="RestaurantModel.FK_orderDetailes_product">
+      <End Role="product" EntitySet="products" />
+      <End Role="orderDetaile" EntitySet="orderDetailes" />
+    </AssociationSet>
+    <EntitySet Name="orders" EntityType="RestaurantModel.order" />
+    <AssociationSet Name="FK_order_user" Association="RestaurantModel.FK_order_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="order" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderDetailes_order" Association="RestaurantModel.FK_orderDetailes_order">
+      <End Role="order" EntitySet="orders" />
+      <End Role="orderDetaile" EntitySet="orderDetailes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="productImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Double" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Boolean" />
+    <Property Name="numberOfProduct" Type="Int32" />
+    <Property Name="cDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="orderDetailes" Relationship="RestaurantModel.FK_orderDetailes_product" FromRole="product" ToRole="orderDetaile" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fullName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="userName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="typeOfUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="cDate" Type="DateTime" Precision="3" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="orders" Relationship="RestaurantModel.FK_order_user" FromRole="user" ToRole="order" />
+  </EntityType>
+  <EntityType Name="orderDetaile">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productId" Type="Int32" />
+    <Property Name="cDate" Type="DateTime" Precision="3" />
+    <Property Name="amount" Type="Int32" />
+    <Property Name="orderId" Type="Int32" />
+    <Property Name="price" Type="Double" />
+    <Property Name="totalPrice" Type="Double" />
+    <Property Name="isActive" Type="Boolean" />
+    <NavigationProperty Name="product" Relationship="RestaurantModel.FK_orderDetailes_product" FromRole="orderDetaile" ToRole="product" />
+    <NavigationProperty Name="order" Relationship="RestaurantModel.FK_orderDetailes_order" FromRole="orderDetaile" ToRole="order" />
+  </EntityType>
+  <Association Name="FK_orderDetailes_product">
+    <End Type="RestaurantModel.product" Role="product" Multiplicity="0..1" />
+    <End Type="RestaurantModel.orderDetaile" Role="orderDetaile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="orderDetaile">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerId" Type="Int32" />
+    <Property Name="price" Type="Double" />
+    <Property Name="cDate" Type="DateTime" Precision="3" />
+    <Property Name="numberOfPices" Type="Int32" />
+    <Property Name="isCompleted" Type="Boolean" />
+    <Property Name="isConfirmed" Type="Boolean" />
+    <NavigationProperty Name="user" Relationship="RestaurantModel.FK_order_user" FromRole="order" ToRole="user" />
+    <NavigationProperty Name="orderDetailes" Relationship="RestaurantModel.FK_orderDetailes_order" FromRole="order" ToRole="orderDetaile" />
+  </EntityType>
+  <Association Name="FK_order_user">
+    <End Type="RestaurantModel.user" Role="user" Multiplicity="0..1" />
+    <End Type="RestaurantModel.order" Role="order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderDetailes_order">
+    <End Type="RestaurantModel.order" Role="order" Multiplicity="0..1" />
+    <End Type="RestaurantModel.orderDetaile" Role="orderDetaile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="orderDetaile">
+        <PropertyRef Name="orderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

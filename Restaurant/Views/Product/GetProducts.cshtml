@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Restaurant.Model.Model.productVM>
+
+@{
+    ViewBag.Title = "GetProducts";
+}
+
+<h2 style="text-align:center"> Products</h2>
+@foreach (var item in Model) { 
+    
+    <div class="card col-md-3"  style=" padding:20px;">
+        <img class="card-img-top" src="~/Image/download.jpg" alt="Card image cap" style=" border-radius:20px !important">
+        <div class="card-body">
+            <h5 class="card-title">@item.productName</h5>
+            <h5 class="card-text">Price : @item.price</h5>
+            <h5 class="card-text">Pice Of Product : @item.numberOfProduct</h5>
+            <p class="card-text">@item.description</p>
+            <a href="/Order/AddToOrder?ProductID=@item.id&numberOfProduct=@item.numberOfProduct" class="btn btn-primary" >Add To Card</a>
+        </div>
+    </div>
+}

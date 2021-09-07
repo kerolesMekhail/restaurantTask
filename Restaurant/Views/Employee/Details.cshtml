@@ -1,0 +1,74 @@
+﻿@model Restaurant.Model.Model.cardVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'>
+                <div class="card col-md-3" style=" padding:20px;">
+                    <img class="card-img-top" src="~/Image/download.jpg" alt="Card image cap" style=" border-radius:20px !important">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.FullName</h5>
+                        <h5 class="card-text">Price : @Model.UserName</h5>
+                        <h5 class="card-text">Name Of Product : @Model.productName</h5>
+                        <h5 class="card-text">Description : @Model.description</h5>
+                        <h5 class="card-text">User Name : @Model.UserName</h5>
+                        <h5 class="card-text">Amount : @Model.amount</h5>
+                        <h5 class="card-text">Total Price :@Model.totalPrice</h5>
+                        <a href="/Employee/Confirmed?id=@Model.orderId"class="btn btn-primary">Confirmed</a>
+                        <a href="/Employee/Orders" class="btn btn-group">Back To Orders</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts
+{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+
+        var TeamDetailPostBackURL = '/Employee/Details';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            //$("#closebtn").on('click',function(){
+            //    $('#myModal').modal('hide');
+
+            $("#closbtn").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+    </script>
+
+}  

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Restaurant.Model.Model.cardVM>
+
+@{
+    ViewBag.Title = "MyProduct";
+}
+
+<h2 style="text-align:center"> My Card</h2>
+<br />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        var tp = item.amount * item.totalPrice;
+        <div class="card col-md-3" style=" padding:20px;">
+            <img class="card-img-top" src="~/Image/download.jpg" alt="Card image cap" style=" border-radius:20px !important">
+            <div class="card-body">
+                <h5 class="card-title">@item.productName</h5>
+                <h5 class="card-text">amount : @item.amount</h5>
+                <h5 class="card-text">Total Price :@tp </h5>
+                <a href="/Order/Delete?id=@item.orderId" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+
+    }
+</div>
+<br />
+<div class="row">
+    <a href="/Order/CheckOut" class="btn btn-primary">Check Out</a>
+    <a href="/Product/GetProducts" class="btn btn-primary">Back To Product</a>
+</div>
+

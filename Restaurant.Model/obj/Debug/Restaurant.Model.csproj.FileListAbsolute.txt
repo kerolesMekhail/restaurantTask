@@ -1,0 +1,12 @@
+F:\Restaurant\Restaurant.Model\bin\Debug\Restaurant.Model.dll.config
+F:\Restaurant\Restaurant.Model\bin\Debug\Restaurant.Model.dll
+F:\Restaurant\Restaurant.Model\bin\Debug\Restaurant.Model.pdb
+F:\Restaurant\Restaurant.Model\bin\Debug\EntityFramework.dll
+F:\Restaurant\Restaurant.Model\bin\Debug\EntityFramework.SqlServer.dll
+F:\Restaurant\Restaurant.Model\bin\Debug\EntityFramework.xml
+F:\Restaurant\Restaurant.Model\bin\Debug\EntityFramework.SqlServer.xml
+F:\Restaurant\Restaurant.Model\obj\Debug\Restaurant.Model.csproj.CoreCompileInputs.cache
+F:\Restaurant\Restaurant.Model\obj\Debug\Restaurant.Model.csproj.CopyComplete
+F:\Restaurant\Restaurant.Model\obj\Debug\Restaurant.Model.dll
+F:\Restaurant\Restaurant.Model\obj\Debug\Restaurant.Model.pdb
+F:\Restaurant\Restaurant.Model\obj\Debug\Restaurant.Model.csprojAssemblyReference.cache
